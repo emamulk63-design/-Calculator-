@@ -1,124 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Calculator</title>
+  <title>জয়া ভাইয়ের জুয়ার হিসাব</title>
   <style>
     body {
+      background: #000;
+      color: #fff;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      text-align: center;
       margin: 0;
-      flex-direction: column;
+      padding: 0;
     }
-
-    .logo {
-      width: 120px;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background: #111;
+    }
+    .header img {
+      width: 90px;
       height: auto;
       border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin-right: 15px;
     }
-
+    .header-text {
+      text-align: left;
+    }
+    .header-text h1 {
+      color: yellow;
+      font-size: 24px;
+      margin: 5px 0;
+    }
+    .header-text p {
+      font-size: 16px;
+      margin: 0;
+    }
     .calculator {
-      background: #fff;
+      width: 300px;
+      margin: 20px auto;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-      width: 260px;
-      text-align: center;
+      border-radius: 20px;
+      background: #111;
+      box-shadow: 0px 0px 20px #333;
     }
-
-    input {
+    #display {
       width: 100%;
       height: 50px;
-      margin-bottom: 10px;
+      font-size: 24px;
       text-align: right;
-      font-size: 20px;
-      padding: 5px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    button {
-      width: 22%;
-      height: 50px;
-      margin: 5px;
-      font-size: 18px;
+      margin-bottom: 15px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 10px;
+      background: #333;
+      color: #fff;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      height: 60px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
       cursor: pointer;
-      color: white;
-      transition: transform 0.2s;
+      color: #fff;
     }
-
-    button:hover {
-      transform: scale(1.05);
+    button:active {
+      transform: scale(0.95);
     }
-
-    /* 🎨 আলাদা আলাদা কালার */
-    .clear { background: #dc3545; }
-    .divide { background: #007bff; }
-    .multiply { background: #6f42c1; }
-    .minus { background: #fd7e14; }
-    .plus { background: #20c997; }
-    .equal { background: #28a745; }
-    .dot, .num0 { background: #17a2b8; }
-    .num1, .num2, .num3 { background: #ffc107; }
-    .num4, .num5, .num6 { background: #e83e8c; }
-    .num7, .num8, .num9 { background: #6610f2; }
+    /* Colors */
+    .red {background: linear-gradient(45deg, #ff416c, #ff4b2b);}
+    .blue {background: linear-gradient(45deg, #2193b0, #6dd5ed);}
+    .green {background: linear-gradient(45deg, #56ab2f, #a8e063);}
+    .purple {background: linear-gradient(45deg, #7b4397, #dc2430);}
+    .orange {background: linear-gradient(45deg, #ff8008, #ffc837);}
+    .pink {background: linear-gradient(45deg, #ff6a00, #ee0979);}
+    .aqua {background: linear-gradient(45deg, #13547a, #80d0c7);}
+    .gray {background: #444;}
   </style>
 </head>
 <body>
-  <!-- তোমার গিটহাবের ছবি -->
-  <img src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/refs/heads/main/Picsart_25-09-17_15-51-29-549.png" 
-       alt="Logo" class="logo">
 
-  <div class="calculator">
-    <input type="text" id="display" disabled>
-    <br>
-
-    <button onclick="clearDisplay()" class="clear">C</button>
-    <button onclick="appendValue('/')" class="divide">÷</button>
-    <button onclick="appendValue('*')" class="multiply">×</button>
-    <button onclick="appendValue('-')" class="minus">-</button>
-
-    <button onclick="appendValue('7')" class="num7">7</button>
-    <button onclick="appendValue('8')" class="num8">8</button>
-    <button onclick="appendValue('9')" class="num9">9</button>
-    <button onclick="appendValue('+')" class="plus">+</button>
-
-    <button onclick="appendValue('4')" class="num4">4</button>
-    <button onclick="appendValue('5')" class="num5">5</button>
-    <button onclick="appendValue('6')" class="num6">6</button>
-    <button onclick="calculate()" class="equal">=</button>
-
-    <button onclick="appendValue('1')" class="num1">1</button>
-    <button onclick="appendValue('2')" class="num2">2</button>
-    <button onclick="appendValue('3')" class="num3">3</button>
-    <button onclick="appendValue('0')" class="num0">0</button>
-
-    <button onclick="appendValue('.')" class="dot">.</button>
+  <!-- Header -->
+  <div class="header">
+    <img src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/refs/heads/main/Picsart_25-09-17_15-51-29-549.png" alt="জয়া ভাই">
+    <div class="header-text">
+      <h1>জয়া ভাইয়ের জুয়ার হিসাব</h1>
+      <p>জুয়া খেলো কোটিপতি হও 😎</p>
+      <p>জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
+    </div>
   </div>
 
+  <!-- Calculator -->
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+      <button class="red" onclick="clearDisplay()">C</button>
+      <button class="blue" onclick="deleteChar()">⌫</button>
+      <button class="orange" onclick="append('%')">%</button>
+      <button class="green" onclick="append('/')">÷</button>
+
+      <button class="orange" onclick="append('7')">7</button>
+      <button class="blue" onclick="append('8')">8</button>
+      <button class="purple" onclick="append('9')">9</button>
+      <button class="purple" onclick="append('*')">×</button>
+
+      <button class="green" onclick="append('4')">4</button>
+      <button class="pink" onclick="append('5')">5</button>
+      <button class="pink" onclick="append('6')">6</button>
+      <button class="blue" onclick="append('-')">−</button>
+
+      <button class="orange" onclick="append('1')">1</button>
+      <button class="orange" onclick="append('2')">2</button>
+      <button class="orange" onclick="append('3')">3</button>
+      <button class="pink" onclick="append('+')">+</button>
+
+      <button class="aqua" onclick="append('0')">0</button>
+      <button class="gray" onclick="append('.')">.</button>
+      <button class="gray" onclick="calculate()">=</button>
+      <button class="green" onclick="append('√(')">√</button>
+    </div>
+  </div>
+
+  <!-- Script -->
   <script>
-    function appendValue(val) {
-      document.getElementById("display").value += val;
+    let display = document.getElementById('display');
+
+    function append(value) {
+      display.value += value;
     }
 
     function clearDisplay() {
-      document.getElementById("display").value = "";
+      display.value = '';
+    }
+
+    function deleteChar() {
+      display.value = display.value.slice(0, -1);
     }
 
     function calculate() {
       try {
-        document.getElementById("display").value = eval(document.getElementById("display").value);
-      } catch {
-        alert("Invalid Input");
+        let expression = display.value.replace(/√\(/g, "Math.sqrt(");
+        display.value = eval(expression);
+      } catch (e) {
+        display.value = 'Error';
       }
     }
   </script>
