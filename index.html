@@ -6,142 +6,155 @@
   <title>জয়া ভাইয়ের জুয়ার হিসাব</title>
   <style>
     body {
-      background: #000;
-      color: #fff;
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    .header {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 15px;
-      background: #111;
-    }
-    .header img {
-      width: 90px;
-      height: auto;
-      border-radius: 12px;
-      margin-right: 15px;
-    }
-    .header-text {
-      text-align: left;
-    }
-    .header-text h1 {
-      color: yellow;
-      font-size: 24px;
-      margin: 5px 0;
-    }
-    .header-text p {
-      font-size: 16px;
+      min-height: 100vh;
       margin: 0;
+      background: #0d0d0d;
+      color: #fff;
+      text-align: center;
     }
+
+    .profile {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      color: #ffdd00;
+      font-size: 28px;
+      margin: 10px 0;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+    }
+
+    p {
+      font-size: 16px;
+      margin: 5px 0 20px;
+    }
+
     .calculator {
-      width: 300px;
-      margin: 20px auto;
+      width: 340px;
+      background: #1a1a1a;
       padding: 20px;
       border-radius: 20px;
-      background: #111;
-      box-shadow: 0px 0px 20px #333;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
     }
+
     #display {
       width: 100%;
-      height: 50px;
-      font-size: 24px;
-      text-align: right;
+      height: 60px;
       margin-bottom: 15px;
-      border: none;
-      border-radius: 10px;
+      text-align: right;
+      font-size: 26px;
       padding: 10px;
-      background: #333;
-      color: #fff;
+      border-radius: 12px;
+      border: none;
+      background: #000;
+      color: #00ff66; /* ডিসপ্লে টেক্সট সবুজ */
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.8);
     }
+
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
     }
+
     button {
-      height: 60px;
+      padding: 18px;
       font-size: 20px;
-      font-weight: bold;
-      border: none;
-      border-radius: 15px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
       cursor: pointer;
+      font-weight: bold;
       color: #fff;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: inset 0 -4px 6px rgba(0,0,0,0.6),
+                  inset 0 2px 4px rgba(255,255,255,0.2),
+                  0 4px 10px rgba(0,0,0,0.6);
+      transition: all 0.2s ease-in-out;
     }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 -3px 5px rgba(0,0,0,0.5),
+                  inset 0 2px 4px rgba(255,255,255,0.3),
+                  0 6px 12px rgba(0,0,0,0.8);
+    }
+
     button:active {
-      transform: scale(0.95);
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
     }
-    /* Colors */
-    .red {background: linear-gradient(45deg, #ff416c, #ff4b2b);}
-    .blue {background: linear-gradient(45deg, #2193b0, #6dd5ed);}
-    .green {background: linear-gradient(45deg, #56ab2f, #a8e063);}
-    .purple {background: linear-gradient(45deg, #7b4397, #dc2430);}
-    .orange {background: linear-gradient(45deg, #ff8008, #ffc837);}
-    .pink {background: linear-gradient(45deg, #ff6a00, #ee0979);}
-    .aqua {background: linear-gradient(45deg, #13547a, #80d0c7);}
-    .gray {background: #444;}
+
+    /* ইউনিক কালার গ্রেডিয়েন্ট */
+    .orange { background: linear-gradient(145deg, #ff512f, #f09819); }
+    .blue   { background: linear-gradient(145deg, #36d1dc, #5b86e5); }
+    .green  { background: linear-gradient(145deg, #56ab2f, #a8e063); }
+    .pink   { background: linear-gradient(145deg, #ff6a88, #ff99ac); }
+    .yellow { background: linear-gradient(145deg, #f7971e, #ffd200); color: #222; }
+    .gray   { background: linear-gradient(145deg, #757f9a, #d7dde8); color: #000; }
+    .purple { background: linear-gradient(145deg, #8e2de2, #4a00e0); }
   </style>
 </head>
 <body>
+  <img src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/main/Picsart_25-09-17_15-51-29-549.png" alt="Profile" class="profile">
+  <h1>জয়া ভাইয়ের জুয়ার হিসাব</h1>
+  <p>জুয়া খেলো কোটিপতি হও 😎<br>জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
 
-  <!-- Header -->
-  <div class="header">
-    <img src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/refs/heads/main/Picsart_25-09-17_15-51-29-549.png" alt="জয়া ভাই">
-    <div class="header-text">
-      <h1>জয়া ভাইয়ের জুয়ার হিসাব</h1>
-      <p>জুয়া খেলো কোটিপতি হও 😎</p>
-      <p>জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
-    </div>
-  </div>
-
-  <!-- Calculator -->
   <div class="calculator">
     <input type="text" id="display" disabled>
     <div class="buttons">
-      <button class="red" onclick="clearDisplay()">C</button>
-      <button class="blue" onclick="deleteChar()">⌫</button>
+      <button class="orange" onclick="clearDisplay()">C</button>
+      <button class="blue" onclick="deleteLast()">⌫</button>
       <button class="orange" onclick="append('%')">%</button>
       <button class="green" onclick="append('/')">÷</button>
 
-      <button class="orange" onclick="append('7')">7</button>
-      <button class="blue" onclick="append('8')">8</button>
-      <button class="purple" onclick="append('9')">9</button>
-      <button class="purple" onclick="append('*')">×</button>
+      <button class="green" onclick="append('7')">7</button>
+      <button class="pink" onclick="append('8')">8</button>
+      <button class="pink" onclick="append('9')">9</button>
+      <button class="blue" onclick="append('*')">×</button>
 
       <button class="green" onclick="append('4')">4</button>
       <button class="pink" onclick="append('5')">5</button>
       <button class="pink" onclick="append('6')">6</button>
       <button class="blue" onclick="append('-')">−</button>
 
-      <button class="orange" onclick="append('1')">1</button>
-      <button class="orange" onclick="append('2')">2</button>
-      <button class="orange" onclick="append('3')">3</button>
+      <button class="yellow" onclick="append('1')">1</button>
+      <button class="yellow" onclick="append('2')">2</button>
+      <button class="yellow" onclick="append('3')">3</button>
       <button class="pink" onclick="append('+')">+</button>
 
-      <button class="aqua" onclick="append('0')">0</button>
+      <button class="green" onclick="append('0')">0</button>
       <button class="gray" onclick="append('.')">.</button>
       <button class="gray" onclick="calculate()">=</button>
-      <button class="green" onclick="append('√(')">√</button>
+      <button class="purple" onclick="append('√')">√</button>
     </div>
   </div>
 
-  <!-- Script -->
   <script>
-    let display = document.getElementById('display');
+    const display = document.getElementById("display");
 
     function append(value) {
-      display.value += value;
+      if (value === '√') {
+        display.value += "√(";
+      } else {
+        display.value += value;
+      }
     }
 
     function clearDisplay() {
-      display.value = '';
+      display.value = "";
     }
 
-    function deleteChar() {
+    function deleteLast() {
       display.value = display.value.slice(0, -1);
     }
 
@@ -149,8 +162,8 @@
       try {
         let expression = display.value.replace(/√\(/g, "Math.sqrt(");
         display.value = eval(expression);
-      } catch (e) {
-        display.value = 'Error';
+      } catch {
+        display.value = "Error";
       }
     }
   </script>
