@@ -2,129 +2,151 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <title>জয়াভাইয়ের জুয়ার হিসাব</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>জুয়ার ক্যালকুলেটর</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #111;
+      background: #000;
       color: #fff;
-      flex-direction: column;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
-      color: #ffcc00;
-      margin-bottom: 10px;
-      text-align: center;
+      color: yellow;
+      margin-top: 20px;
     }
 
     p {
       margin-bottom: 20px;
-      color: #ccc;
-      text-align: center;
     }
 
     .calculator {
-      background: #333;
+      display: inline-block;
+      background: #111;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #000;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
 
-    #result {
+    .display {
       width: 100%;
-      height: 40px;
-      font-size: 20px;
-      margin-bottom: 10px;
+      height: 50px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: #222;
+      font-size: 28px;
+      font-weight: bold;
       text-align: right;
-      padding: 5px;
-      border-radius: 5px;
-      border: none;
+      padding: 10px;
+      color: transparent;
+
+      /* টেক্সটে রঙ */
+      background-image: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff00ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      overflow-x: auto;
     }
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(4, 60px);
-      grid-gap: 10px;
+      grid-template-columns: repeat(4, 70px);
+      gap: 10px;
+      justify-content: center;
     }
 
-    button {
-      padding: 15px;
-      font-size: 18px;
+    .buttons button {
+      font-size: 20px;
+      font-weight: bold;
       border: none;
-      border-radius: 5px;
-      background: #555;
-      color: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      color: white;
       cursor: pointer;
       transition: 0.3s;
     }
 
-    button:hover {
-      background: #777;
+    /* প্রতিটা বাটনে আলাদা রঙ */
+    .buttons button:nth-child(1) { background: linear-gradient(45deg, #ff512f, #dd2476); }
+    .buttons button:nth-child(2) { background: linear-gradient(45deg, #24c6dc, #514a9d); }
+    .buttons button:nth-child(3) { background: linear-gradient(45deg, #ff9966, #ff5e62); }
+    .buttons button:nth-child(4) { background: linear-gradient(45deg, #00b09b, #96c93d); }
+    .buttons button:nth-child(5) { background: linear-gradient(45deg, #f46b45, #eea849); }
+    .buttons button:nth-child(6) { background: linear-gradient(45deg, #2193b0, #6dd5ed); }
+    .buttons button:nth-child(7) { background: linear-gradient(45deg, #cc2b5e, #753a88); }
+    .buttons button:nth-child(8) { background: linear-gradient(45deg, #42275a, #734b6d); }
+    .buttons button:nth-child(9) { background: linear-gradient(45deg, #11998e, #38ef7d); }
+    .buttons button:nth-child(10) { background: linear-gradient(45deg, #fc5c7d, #6a82fb); }
+    .buttons button:nth-child(11) { background: linear-gradient(45deg, #f7971e, #ffd200); }
+    .buttons button:nth-child(12) { background: linear-gradient(45deg, #56ccf2, #2f80ed); }
+    .buttons button:nth-child(13) { background: linear-gradient(45deg, #ff416c, #ff4b2b); }
+    .buttons button:nth-child(14) { background: linear-gradient(45deg, #7f00ff, #e100ff); }
+    .buttons button:nth-child(15) { background: linear-gradient(45deg, #00c6ff, #0072ff); }
+    .buttons button:nth-child(16) { background: linear-gradient(45deg, #f953c6, #b91d73); }
+
+    .buttons button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.6);
     }
   </style>
 </head>
 <body>
-  <h1>জয়াভাইয়ের জুয়ার হিসাব</h1>
-  <p>জুয়ো খেলো কটিপতি হও 😎 <br> জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
+  <h1>জুয়ার হিসাব</h1>
+  <p>জুয়া খেলে কোটিপতি হও 😎 <br> জয় ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
 
   <div class="calculator">
-    <input type="text" id="result" disabled>
+    <div class="display" id="display"></div>
     <div class="buttons">
-      <button onclick="clearResult()">C</button>
-      <button onclick="deleteChar()">⌫</button>
-      <button onclick="appendValue('%')">%</button>
-      <button onclick="appendValue('/')">÷</button>
-      <button onclick="appendValue('7')">7</button>
-      <button onclick="appendValue('8')">8</button>
-      <button onclick="appendValue('9')">9</button>
-      <button onclick="appendValue('*')">×</button>
-      <button onclick="appendValue('4')">4</button>
-      <button onclick="appendValue('5')">5</button>
-      <button onclick="appendValue('6')">6</button>
-      <button onclick="appendValue('-')">-</button>
-      <button onclick="appendValue('1')">1</button>
-      <button onclick="appendValue('2')">2</button>
-      <button onclick="appendValue('3')">3</button>
-      <button onclick="appendValue('+')">+</button>
-      <button onclick="appendValue('0')">0</button>
-      <button onclick="appendValue('.')">.</button>
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button onclick="append('%')">%</button>
+      <button onclick="append('/')">÷</button>
+
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')">×</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">−</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')">+</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="append('.')">.</button>
       <button onclick="calculate()">=</button>
-      <button onclick="sqrt()">√</button>
+      <button onclick="append('√(')">√</button>
     </div>
   </div>
 
   <script>
-    let result = document.getElementById("result");
+    const display = document.getElementById('display');
 
-    function appendValue(val) {
-      result.value += val;
+    function append(value) {
+      display.textContent += value;
     }
 
-    function clearResult() {
-      result.value = "";
+    function clearDisplay() {
+      display.textContent = '';
     }
 
-    function deleteChar() {
-      result.value = result.value.slice(0, -1);
+    function deleteLast() {
+      display.textContent = display.textContent.slice(0, -1);
     }
 
     function calculate() {
       try {
-        result.value = eval(result.value);
+        let expression = display.textContent.replace(/√/g, 'Math.sqrt');
+        display.textContent = eval(expression);
       } catch {
-        result.value = "Error";
-      }
-    }
-
-    function sqrt() {
-      try {
-        result.value = Math.sqrt(result.value);
-      } catch {
-        result.value = "Error";
+        display.textContent = 'Error';
       }
     }
   </script>
