@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>জয়া ভাইয়ের জুয়ার হিসাব</title>
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --card:#111;
+    --muted:#ddd;
+    --accent-green:#00e676;
+    --button-radius:14px;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);font-family: "Poppins", system-ui, Arial, sans-serif;color:#fff}
+  .wrap{max-width:920px;margin:0 auto;padding:18px;}
+  /* top area: image + titles */
+  .top{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding-top:8px;
+  }
+  .avatar{
+    width:110px;height:110px;object-fit:cover;border-radius:18px;
+    box-shadow:0 8px 18px rgba(0,0,0,.6), 0 0 0 6px rgba(255,255,255,0.03);
+    border:6px solid rgba(255,255,255,0.05);
+    background:#fff;
+  }
+  .titles{text-align:center;min-width:220px;}
+  .titles h1{margin:8px 0 6px;font-size:34px;color:#ffd500;line-height:1.02;text-shadow:0 6px 0 rgba(0,0,0,.6);font-weight:800}
+  .titles p{margin:0;color:#dfeff6;font-size:18px}
+  .contact {
+    display:inline-block;margin-top:10px;padding:10px 20px;border-radius:999px;
+    background:linear-gradient(90deg,#ff6b6b,#ff9068);color:#fff;text-decoration:none;
+    box-shadow:0 8px 24px rgba(255,80,80,0.15);font-weight:600;
+  }
+
+  /* calculator card */
+  .card{
+    margin-top:18px;background:linear-gradient(180deg,#0f0f0f,#0b0b0b);padding:18px;border-radius:22px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.02);
+  }
+
+  .display{
+    background:#000; height:70px;border-radius:12px;padding:18px;color:var(--accent-green);
+    font-size:26px;text-align:right;box-shadow: inset 0 2px 8px rgba(0,0,0,0.6); margin-bottom:16px;
+    display:flex;align-items:center;justify-content:flex-end;padding-right:20px;
+  }
+
+  .keys{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  }
+
+  /* colorful keyboard-like keys */
+  .key{
+    height:82px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:22px;font-weight:700;color:#fff;cursor:pointer;user-select:none;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5), 0 2px 6px rgba(255,255,255,0.03) inset;
+    border: 2px solid rgba(255,255,255,0.06);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .key:active{transform:translateY(3px);box-shadow:0 4px 8px rgba(0,0,0,0.6)}
+  /* gradients for keys - pick different ones */
+  .g1{background:linear-gradient(135deg,#ff7a7a,#ff9a59)} /* C */
+  .g2{background:linear-gradient(135deg,#5fd3ff,#7bd8ff)} /* back */
+  .g3{background:linear-gradient(135deg,#ffb36e,#ffc37a)} /* % */
+  .g4{background:linear-gradient(135deg,#4ee36b,#2ed58b)} /* ÷ */
+  .g5{background:linear-gradient(135deg,#ffd24b,#ffd46b)} /* numbers */
+  .g6{background:linear-gradient(135deg,#7a6bff,#4a6bff)}
+  .g7{background:linear-gradient(135deg,#ff9ab3,#ff9ab3)}
+  .g8{background:linear-gradient(135deg,#42d3ff,#7ad0ff)}
+  .equal{background:linear-gradient(90deg,#00d276,#00a85a);font-weight:800;color:#fff;height:82px;border-radius:12px}
+  .zero{grid-column:span 1}
+  /* glassy border highlight */
+  .key::after{
+    content:"";position:absolute;width:calc(100% - 12px);height:calc(100% - 12px);border-radius:10px;pointer-events:none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    opacity:.35;
+  }
+
+  /* make keys look like keyboard keys with small inner border */
+  .kb-wrap{position:relative}
+  .key{position:relative;overflow:hidden}
+
+  /* responsive: smaller screens */
+  @media (max-width:640px){
+    .wrap{padding:12px}
+    .avatar{width:86px;height:86px}
+    .titles h1{font-size:28px}
+    .display{height:62px;font-size:22px}
+    .key{height:68px;font-size:20px}
+  }
+  @media (max-width:420px){
+    .top{justify-content:center}
+    .titles{text-align:center}
+    /* make calculator and image show together: reduce key height and scale a bit */
+    .avatar{width:72px;height:72px}
+    .titles h1{font-size:22px}
+    .display{height:56px;font-size:20px}
+    .key{height:60px;font-size:18px}
+  }
+
+  /* custom contact smaller in narrow screens */
+  @media (max-width:420px){
+    .contact{padding:8px 14px;font-size:14px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <!-- change image src to your raw github url if you update image -->
+      <img class="avatar" src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/refs/heads/main/Picsart_25-09-17_15-51-29-549.png" alt="Joyavai">
+      <div class="titles">
+        <!-- HEADER: (আপনি চাইলে এখান থেকে টেক্সট বদলাতে পারবেন) -->
+        <h1>জয়া ভাইয়ের জুয়ার হিসাব</h1>
+        <p>জুয়া খেলো কটিপতিও হও — জয়া ভাইয়ের ক্যালকুলেটরের সাহায্যে হিসাব করো!</p>
+        <div style="margin-top:8px;">
+          <!-- Contact button -->
+          <a class="contact" href="https://www.facebook.com/asif.islam.73446" target="_blank" rel="noopener">
+            📩 contact us 👉 Joyavai
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- card with display + keys -->
+    <div class="card" style="margin-top:22px;">
+      <div id="display" class="display"></div>
+
+      <div class="keys kb-wrap">
+        <!-- Row 1 -->
+        <div class="key g1" data-key="C">C</div>
+        <div class="key g2" data-key="back">⌫</div>
+        <div class="key g3" data-key="%">%</div>
+        <div class="key g4" data-key="/">÷</div>
+
+        <!-- Row 2 -->
+        <div class="key g5" data-key="7">7</div>
+        <div class="key g6" data-key="8">8</div>
+        <div class="key g7" data-key="9">9</div>
+        <div class="key g8" data-key="*">×</div>
+
+        <!-- Row 3 -->
+        <div class="key g4" data-key="4">4</div>
+        <div class="key g7" data-key="5">5</div>
+        <div class="key g7" data-key="6">6</div>
+        <div class="key g6" data-key="-">−</div>
+
+        <!-- Row 4 -->
+        <div class="key g5" data-key="1">1</div>
+        <div class="key g5" data-key="2">2</div>
+        <div class="key g5" data-key="3">3</div>
+        <div class="key g7" data-key="+">+</div>
+
+        <!-- Row 5 -->
+        <div class="key g6" data-key="0">0</div>
+        <div class="key g6" data-key=".">.</div>
+        <div class="key equal" data-key="=">=</div>
+        <div class="key g4" data-key="sqrt">√</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  (function(){
+    const display = document.getElementById('display');
+    let expr = '';
+
+    function updateDisplay(){
+      display.textContent = expr || '';
+    }
+
+    function safeEval(s){
+      try{
+        // Replace unicode divide and multiply if present
+        s = s.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-');
+        // handle percentage: e.g. "50%" -> (50/100) but for expressions like "200+10%" -> 200+(200*10/100)
+        // simple approach: convert standalone n% to (n/100)
+        s = s.replace(/([0-9.]+)%/g, '($1/100)');
+        // evaluate
+        const val = Function('"use strict";return (' + s + ')')();
+        if(val === Infinity || isNaN(val)) return 'Error';
+        return val;
+      }catch(e){
+        return 'Error';
+      }
+    }
+
+    document.querySelectorAll('.key').forEach(k=>{
+      k.addEventListener('click', ()=>{
+        const key = k.getAttribute('data-key');
+        if(key === 'C'){ expr=''; updateDisplay(); return; }
+        if(key === 'back'){ expr = expr.slice(0,-1); updateDisplay(); return; }
+        if(key === '='){
+          const res = safeEval(expr);
+          expr = (res === 'Error') ? ''+res : String(res);
+          updateDisplay();
+          return;
+        }
+        if(key === 'sqrt'){
+          // sqrt current expression or last number
+          const val = safeEval(expr || '0');
+          if(val === 'Error'){ expr='Error'; updateDisplay(); return; }
+          expr = String(Math.sqrt(Number(val)));
+          updateDisplay();
+          return;
+        }
+        // append other keys
+        // prevent starting with operator (except minus)
+        if(/^[\+\*\/\%]$/.test(key) && expr==='' ) return;
+        expr += key;
+        updateDisplay();
+      })
+    });
+
+    // initial empty
+    updateDisplay();
+  })();
+</script>
+</body>
+</html>
