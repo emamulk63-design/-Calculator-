@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>জয়াভাইয়ের জুয়ার হিসাব</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .calculator {
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    #result {
+      width: 100%;
+      height: 40px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: right;
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background: #555;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>জয়াভাইয়ের জুয়ার হিসাব</h1>
+  <p>জুয়ো খেলো কটিপতি হও 😎 <br> জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
+
+  <div class="calculator">
+    <input type="text" id="result" disabled>
+    <div class="buttons">
+      <button onclick="clearResult()">C</button>
+      <button onclick="deleteChar()">⌫</button>
+      <button onclick="appendValue('%')">%</button>
+      <button onclick="appendValue('/')">÷</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('*')">×</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('-')">-</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('+')">+</button>
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="sqrt()">√</button>
+    </div>
+  </div>
+
+  <script>
+    let result = document.getElementById("result");
+
+    function appendValue(val) {
+      result.value += val;
+    }
+
+    function clearResult() {
+      result.value = "";
+    }
+
+    function deleteChar() {
+      result.value = result.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        result.value = eval(result.value);
+      } catch {
+        result.value = "Error";
+      }
+    }
+
+    function sqrt() {
+      try {
+        result.value = Math.sqrt(result.value);
+      } catch {
+        result.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
