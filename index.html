@@ -55,8 +55,20 @@
       border-radius: 12px;
       border: none;
       background: #000;
-      color: #00ff66; /* ডিসপ্লে টেক্সট সবুজ */
+      color: #00ff66;
       box-shadow: inset 0 3px 6px rgba(0,0,0,0.8);
+      font-family: monospace;
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     .buttons {
@@ -110,7 +122,7 @@
   <p>জুয়া খেলো কোটিপতি হও 😎<br>জয়া ভাইয়ের ক্যালকুলেটর দিয়ে হিসাব করো!</p>
 
   <div class="calculator">
-    <input type="text" id="display" disabled>
+    <div id="display"></div>
     <div class="buttons">
       <button class="orange" onclick="clearDisplay()">C</button>
       <button class="blue" onclick="deleteLast()">⌫</button>
@@ -139,33 +151,85 @@
     </div>
   </div>
 
+  <!-- সাউন্ড ফাইল -->
+  <audio id="sound1" src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/main/sound1.mp3"></audio>
+  <audio id="sound2" src="https://raw.githubusercontent.com/emamulk63-design/-Calculator-/main/sound2.mp3"></audio>
+  <audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
   <script>
     const display = document.getElementById("display");
+    const sound1 = document.getElementById("sound1");
+    const sound2 = document.getElementById("sound2");
+    const clickSound = document.getElementById("clickSound");
+
+    let isFirstInput = true; // নতুন হিসাবের প্রথম বাটন ট্র্যাক করবে
+
+    function updateCursor() {
+      if (display.innerText.trim() === "") {
+        display.innerHTML = '<span class="cursor">|</span>';
+      }
+    }
+
+    function playClick() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+
+    function playSound1() {
+      sound1.currentTime = 0;
+      sound1.play();
+    }
+
+    function playSound2() {
+      sound2.currentTime = 0;
+      sound2.play();
+    }
 
     function append(value) {
-      if (value === '√') {
-        display.value += "√(";
+      if (/^[0-9]$/.test(value) && isFirstInput) {
+        playSound1();
+        isFirstInput = false;
       } else {
-        display.value += value;
+        playClick();
+      }
+
+      if (display.innerText.includes("|")) {
+        display.innerText = "";
+      }
+
+      if (value === '√') {
+        display.innerText += "√(";
+      } else {
+        display.innerText += value;
       }
     }
 
     function clearDisplay() {
-      display.value = "";
+      playClick();
+      display.innerText = "";
+      updateCursor();
+      isFirstInput = true; // Clear করলে আবার নতুন হিসাব শুরু
     }
 
     function deleteLast() {
-      display.value = display.value.slice(0, -1);
+      playClick();
+      display.innerText = display.innerText.slice(0, -1);
+      if (display.innerText === "") {
+        updateCursor();
+      }
     }
 
     function calculate() {
+      playSound2(); // = চাপলে sound2 বাজবে
       try {
-        let expression = display.value.replace(/√\(/g, "Math.sqrt(");
-        display.value = eval(expression);
+        let expression = display.innerText.replace(/√\(/g, "Math.sqrt(");
+        display.innerText = eval(expression);
       } catch {
-        display.value = "Error";
+        display.innerText = "Error";
       }
     }
+
+    updateCursor();
   </script>
 </body>
 </html>
